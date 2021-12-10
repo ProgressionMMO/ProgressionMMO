@@ -1,0 +1,6 @@
+name: ProgressionMMO
+author: Lukas Fend
+version: 0.1
+main: ninja.lukasfend.ProgressionMMO.ProgressionMMO
+api-version: 1.17
+description: An all-in-one MMO plugin
