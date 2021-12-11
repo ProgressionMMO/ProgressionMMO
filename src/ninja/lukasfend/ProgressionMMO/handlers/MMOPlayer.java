@@ -81,7 +81,7 @@ public class MMOPlayer {
 		save();
 	}
 	public int getLevel(SkillType skill) {
-		return Skill.getLevelByXp(getXP(skill))+1;
+		return Skill.getLevelByXp(getXP(skill));
 	}
 	public int getTotalLevel() {
 		int total = 0;
@@ -89,6 +89,19 @@ public class MMOPlayer {
 			total += getLevel(skill);
 		}
 		return total;
+	}
+	public double getProgress(SkillType skill) {
+		int level = getLevel(skill);
+		if(level == 99) return 1.00f;
+		int minXP = Skill.getTotalXPOfLevel(level);
+		int maxXP = Skill.getTotalXPOfLevel(level+1);
+		int currXP = getXP(skill);
+		double progress = (double) ((double) currXP - (double) minXP) / ((double) maxXP);
+		System.out.println("Level: " + level + " MinXP: " + minXP + " MaxXP: " + maxXP + " CurrXP: " + currXP + " Percentage: " + progress);
+		if(progress < 0 || progress > 1) {
+			return 0;
+		}
+		return progress;
 	}
 
 	public static void unloadAll() {

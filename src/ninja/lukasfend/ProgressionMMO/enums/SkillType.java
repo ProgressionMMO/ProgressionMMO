@@ -33,6 +33,59 @@ public enum SkillType {
 		}
 	}
 	
+	public String getDescriptionLore() {
+		switch(this) {
+			case STRENGTH: 	
+				return "\nStrength is a skill that is trained whenever\n"
+						+ "you use melee attacks against opponents.\n"
+						+ "The stronger the opponent,\n"
+						+ "the more XP you'll get.\n"
+						+ "Leveling up this skill will provide you\n"
+						+ "with extra damage on all melee attacks";
+			default:
+				return "";
+	}
+	}
+	
+	public static SkillType fromString(String name) {
+		switch(name.toUpperCase()) {
+			case "AGILITY": 	
+				return AGILITY;
+			case "ARCHERY":
+				return ARCHERY;
+			case "ARMORSMITHING":
+				return ARMORSMITHING;
+			case "ATTACK":
+				return ATTACK;
+			case "DEFENSE":
+				return DEFENSE;
+			case "FARMING":
+				return FARMING;
+			case "FISHING":
+				return FISHING;
+			case "HEALTH":
+				return HEALTH;
+			case "HERBLORE":
+				return HERBLORE;
+			case "MINING":
+				return MINING;
+			case "SLAYER":
+				return SLAYER;
+			case "SORCERY":
+				return SORCERY;
+			case "STRENGTH":
+				return STRENGTH;
+			case "SUMMONING":
+				return SUMMONING;
+			case "THIEVING":
+				return THIEVING;
+			case "WEAPONSMITHING":
+				return WEAPONSMITHING;
+			default:
+				return null;
+		}
+	}
+	
 	public String getColor() {
 		switch(this) {
 			case STRENGTH:

@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ninja.lukasfend.ProgressionMMO.commands.CommandDev;
 import ninja.lukasfend.ProgressionMMO.commands.CommandLevels;
+import ninja.lukasfend.ProgressionMMO.commands.CommandSkill;
 import ninja.lukasfend.ProgressionMMO.enums.ProjectileTag;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
 import ninja.lukasfend.ProgressionMMO.events.EventProjectileHit;
@@ -40,6 +41,7 @@ public class ProgressionMMO extends JavaPlugin {
 		System.out.println("[ProgressionMMO] Loading commands...");
 		getCommand("pmdev").setExecutor(new CommandDev());
 		getCommand("pmlevels").setExecutor(new CommandLevels());
+		getCommand("pmskill").setExecutor(new CommandSkill());
 		
 		System.out.println("[ProgressionMMO] Registering events...");
 		getServer().getPluginManager().registerEvents(new EventProjectileHit(), this);

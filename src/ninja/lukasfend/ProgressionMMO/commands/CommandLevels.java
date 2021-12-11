@@ -1,13 +1,7 @@
 package ninja.lukasfend.ProgressionMMO.commands;
 
-import java.text.DecimalFormat;
-import java.util.Collections;
-import java.util.Formatter;
 import java.util.List;
 
-import javax.swing.GroupLayout.Alignment;
-
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,6 +21,7 @@ import ninja.lukasfend.ProgressionMMO.skills.Skill;
 
 public class CommandLevels implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("pmlevels")) {
@@ -46,10 +41,8 @@ public class CommandLevels implements CommandExecutor {
 					return true;
 				}
 			}
-			
+			cs.sendMessage(" ");
 			MMOPlayer mp = MMOPlayer.get(target);
-			Bukkit.broadcastMessage("Sending...\n");
-
 			//Formatter formatter = new Formatter();
 			//cs.sendMessage("\n"+formatter.format("| %-18s | %-3s | %-10s | %-10s | %-12s |%n", "Skill", "Lvl", "Current XP", "Next XP", "Progress").toString());
 			TableGenerator tg = new TableGenerator(
@@ -65,16 +58,19 @@ public class CommandLevels implements CommandExecutor {
 			for(SkillType skill : SkillType.values()) {
 				int xp = mp.getXP(skill);
 				int nextXp = Skill.getTotalXPOfLevel(mp.getLevel(skill)+1);
-				double percentageCompleted = (double) xp / (double) nextXp; 
-				if(percentageCompleted >= 1.0f) {
-					percentageCompleted = 0.99f;
+				double percentageCompleted = mp.getProgress(skill);
+				String percentageText = (percentageCompleted == 1.0f) ? "" : String.format("%.02f", percentageCompleted*100).replace(",", ".")+"%";
+				int level = mp.getLevel(skill);
+				String levelText = (level < 99) ? level+"" : "§5" + level;
+				if(level == 99) {
+					nextXp = -1;
 				}
 				tg.addRow(
 					"§6 "+skill.getSkillName(), 
-					mp.getLevel(skill)+"",
+					levelText,
 					StringHelper.thousandSpacers(xp)+"",
-					StringHelper.thousandSpacers(nextXp)+"",
-					"§l"+StringHelper.progressBar(22, percentageCompleted) + " §r§7" + String.format("%.02f", percentageCompleted*100).replace(",", ".") + "%"
+					(nextXp == -1) ? "§7Max!§r":StringHelper.thousandSpacers(nextXp)+"",
+					"§l"+StringHelper.progressBar(22, percentageCompleted) + " §r§7" + percentageText + ""
 				);
 			}
 			List<String> lines = tg.generate(Receiver.CLIENT, true, true);
@@ -89,8 +85,7 @@ public class CommandLevels implements CommandExecutor {
 			 		cs.sendMessage(lines.get(i));
 			 	}
 			}
-			cs.sendMessage(" §dTotal Level: §r" + mp.getTotalLevel() + "                  §dTotal XP: §r" + mp.getXP());
-			//cs.sendMessage(formatter.format("|=%-12s=|=%-3s=|=%-10s=|=%-10s=|=%-12s=|", space12, space3, space10, space10, space12).toString());
+			cs.sendMessage(" §dTotal Level: §r" + mp.getTotalLevel() + "                  §dTotal XP: §r" + StringHelper.thousandSpacers(mp.getXP()));
 			return true;
 		}
 		return false;

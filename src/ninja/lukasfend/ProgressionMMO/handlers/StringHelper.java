@@ -3,14 +3,15 @@ package ninja.lukasfend.ProgressionMMO.handlers;
 import java.text.NumberFormat;
 import java.util.Collections;
 
-import ninja.lukasfend.ProgressionMMO.enums.DefaultFontEnum;
-
 public class StringHelper {
 	public static String times(String text, int times) {
 		return String.join("", Collections.nCopies(times, text));
 	}
 	
 	public static String progressBar(int charcount, double percent) { 
+		if(percent > 1f) {
+			percent = 1f;
+		}
 		int spacesActive = (int) Math.round(percent* charcount);
 		return "§2" + StringHelper.times("|", spacesActive) + "§4" + StringHelper.times("|", charcount-spacesActive);
 	}

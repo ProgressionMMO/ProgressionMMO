@@ -7,11 +7,13 @@ description: An all-in-one MMO plugin
 depend: [HolographicDisplays]
 commands:
   pmdev:
-    usage: /<command> [player]
+    usage: Usage /<command> [player]
     description: Development command
     permission: progressionmmo.devcommand
-    aliases: [pmxp]
+  pmskill:
+    usage: Usage /<command> <agility|archery|armorsmithing|attack|defense|farming|fishing|health|herblore|mining|slayer|sorcery|strength|summoning|thieving|weaponsmithing>
+    description: Shows extended information about a skill and your current progress
   pmlevels:
-    usage: /<command> [player]
+    usage: Usage /<command> [player]
     description: Shows the levels and xp of a player
     aliases: [pmxp]

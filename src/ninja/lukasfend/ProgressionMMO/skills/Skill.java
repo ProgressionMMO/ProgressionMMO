@@ -20,23 +20,32 @@ public abstract class Skill implements Listener {
 	
 	public static int getXPOfLevel(int level) {
 		if(level <= 1) return 0;
+		if(level > 99) {
+			level = 99;
+		}
 		double xp = 0.25 * ( (level-1f) + 300f * Math.pow(2f, (level-1f)/7f) );
 		return (int) Math.round(xp);
 	}
 	public static int getTotalXPOfLevel(int level) {
 		double total=0;
-		for(int i = 1; i < level+1; i++) {
+		if(level > 99) {
+			level = 99;
+		}
+		for(int i = 1; i <= level; i++) {
 			total += getXPOfLevel(i);
 		}
 		return (int) Math.round(total);
 	}
 	public static int getLevelByXp(int xp) {
+		if(xp >= getTotalXPOfLevel(99)) {
+			return 99;
+		}
+		if(xp == 0) {
+			return 1;
+		}
 		int level = 1;
 		while(getTotalXPOfLevel(level) < xp) {
 			level++;
-		}
-		if(level > 100) {
-			level = level - (level % 100);
 		}
 		return level-1;
 	}
