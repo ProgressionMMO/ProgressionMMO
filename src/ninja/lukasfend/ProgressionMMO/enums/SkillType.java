@@ -1,7 +1,9 @@
 package ninja.lukasfend.ProgressionMMO.enums;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 
+import net.md_5.bungee.api.ChatColor;
 import ninja.lukasfend.ProgressionMMO.skills.Skill;
 import ninja.lukasfend.ProgressionMMO.skills.SkillStrength;
 
@@ -33,6 +35,8 @@ public enum SkillType {
 	
 	public String getColor() {
 		switch(this) {
+			case STRENGTH:
+				return "§c";
 			default:
 				return "§0";
 		}
@@ -40,7 +44,7 @@ public enum SkillType {
 	
 	public Material getIconMaterial() {
 		switch(this) {
-			case AGILITY:
+			case AGILITY: 	
 				return Material.FEATHER;
 			case ARCHERY:
 				return Material.BOW;

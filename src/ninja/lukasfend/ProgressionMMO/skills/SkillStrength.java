@@ -1,7 +1,7 @@
 package ninja.lukasfend.ProgressionMMO.skills;
 
-import ninja.lukasfend.ProgressionMMO.MMOPlayer;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
+import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
 
 public class SkillStrength extends Skill {
 

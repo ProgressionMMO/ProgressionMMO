@@ -1,5 +1,6 @@
-package ninja.lukasfend.ProgressionMMO;
+package ninja.lukasfend.ProgressionMMO.handlers;
 
+import ninja.lukasfend.ProgressionMMO.ProgressionMMO;
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultConfigurationFile;
 
 public class ConfigurationVar {
