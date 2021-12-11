@@ -9,6 +9,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultPlayerDataFile;
+import ninja.lukasfend.ProgressionMMO.enums.SkillType;
+import ninja.lukasfend.ProgressionMMO.skills.Skill;
 
 public class MMOPlayer {
 	
@@ -25,10 +27,11 @@ public class MMOPlayer {
 		
 		if(!data.contains("player.uuid")) {
 			data = DefaultPlayerDataFile.generate(p, dataFile);
+			save();
 		}
 		
 	}
-	
+
 	public void save() {
 		try {
 			data.save(dataFile);
@@ -36,12 +39,7 @@ public class MMOPlayer {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
+
 	public static MMOPlayer get(Player p) {
 		String uuidStr = p.getUniqueId().toString();
 		if(playerInstances.containsKey(uuidStr)) {
@@ -59,5 +57,26 @@ public class MMOPlayer {
 		return;
 	}
 
+	
+	// Functions
+	public int getXP() {
+		return data.getInt("player.totalXp");
+	}
+	public int getXP(SkillType skill) {
+		return data.getInt("player.skills."+skill.toString() + ".xp");
+	}
+	public void addXP(SkillType skill, int xp) {
+		int newXP = getXP(skill)+xp; 
+		int previousLevel = Skill.getLevelByXp(newXP-xp);
+		int newLevel = Skill.getLevelByXp(newXP);
+		data.set("player.skills."+skill.toString()+".xp", previousLevel+xp);
+		data.set("player.totalXp", getXP()+xp);
+		if( newLevel > previousLevel ) {
+			// Level UP!
+			// Skill.levelUp(player, newLevel);
+		}
+		save();
+	}
+	
 	
 }

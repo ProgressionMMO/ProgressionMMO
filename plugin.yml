@@ -4,3 +4,8 @@ version: 0.1
 main: ninja.lukasfend.ProgressionMMO.ProgressionMMO
 api-version: 1.17
 description: An all-in-one MMO plugin
+commands:
+  pmlevels:
+    usage: /<command> [player]
+    description: Show level and xp for a player
+    aliases: [pmxp]
