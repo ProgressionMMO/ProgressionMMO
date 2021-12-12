@@ -97,7 +97,6 @@ public class MMOPlayer {
 		int maxXP = Skill.getTotalXPOfLevel(level+1);
 		int currXP = getXP(skill);
 		double progress = (double) ((double) currXP - (double) minXP) / ((double) maxXP);
-		System.out.println("Level: " + level + " MinXP: " + minXP + " MaxXP: " + maxXP + " CurrXP: " + currXP + " Percentage: " + progress);
 		if(progress < 0 || progress > 1) {
 			return 0;
 		}

@@ -7,8 +7,6 @@ import org.bukkit.entity.Player;
 
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
 import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
-import xyz.xenondevs.particle.ParticleBuilder;
-import xyz.xenondevs.particle.ParticleEffect;
 import java.awt.Color;
 
 public class CommandDev implements CommandExecutor {
@@ -29,10 +27,10 @@ public class CommandDev implements CommandExecutor {
 				cs.sendMessage("Reloaded");
 			} else if(args[0].equalsIgnoreCase("testeffect")) {
 				cs.sendMessage("Testing effect");
-				new ParticleBuilder(ParticleEffect.FLAME, p.getLocation())
+				/*new ParticleBuilder(ParticleEffect.FLAME, p.getLocation())
 					.setColor(Color.YELLOW)
 					.display();
-				
+				*/
 			}
 		}
 		return true;

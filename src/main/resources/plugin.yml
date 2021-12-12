@@ -1,9 +1,10 @@
 name: ProgressionMMO
-author: Lukas Fend
-version: 0.1
+version: '${project.version}'
 main: ninja.lukasfend.ProgressionMMO.ProgressionMMO
-api-version: 1.17
-description: An all-in-one MMO plugin
+author: Lukas Fend
+api-version: 1.18
+description: An all-in-one MMO plugin for Minecraft!
+website: lukasfend.ninja
 depend: [HolographicDisplays]
 commands:
   pmdev:
