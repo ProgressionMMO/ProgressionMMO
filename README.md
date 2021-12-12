@@ -175,17 +175,62 @@ Players can click on a row to automatically run `/pmskill` of the skill clicked.
 
 ### `/pmskill <skillname>`
 Shows detailed info about a skill:  
-![](blob:https://imgur.com/44a32111-00bb-4495-921b-32e8dd0b0360)  
+![](https://i.imgur.com/kHmchTE.png)  
 
 ## Spells & Abilities
 
 ### Agility Abilities
+
 ### Archery Abilities
+#### Windquiver
+* **Spell Name:** `Windquiver`
+* **Spell Type:** `Passive`
+* **Description:** `Every arrow has x% chance to be returned to your inventory`
+* **Unlocked at Level:** `10`
+* **Upgrades at Levels:** `20/30/40/50/60/70/80/90/99`
+* **Chance at Levels:** `5/6/7/8/10/15/20/25/30/35/100`
+* _Refund chance is reduced by 75% when shooting a tipped arrow_
+
+
 ### Armorsmithing Abilities
+
 ### Attack Abilities
+
 ### Defense Abilities
+#### Counterwind
+* **Spell Name:** `Counterwind`  
+* **Spell Type:** `Passive`  
+* **Description:** `Reflect any projectile back to it's origin`  
+* **Unlocked at Level:** `40`  
+* **Upgrades at Levels:** `50/60/70/80/90/99`  
+* **Cooldown:** `80s/60s/40s/30s/25s/20s/15s`  
+
 ### Farming Abilities
+
 ### Fishing Abilities
+
 ### Health Abilities
+#### Vampirism
+* **Spell Name:** `Vampirism`
+* **Spell Type:** `Passive`
+* **Description:** `Heal of x% of your damage dealt.`
+* **Unlocked at Level:** `40`
+* **Upgrades at Levels:** `50/60/70/80/90/99`
+* **Cooldown:** `30/27/24/20/18/15/12`
+* **Heal Percentage at Levels:** `5/8/12/16/20/22/25`
+
 ### Herblore Abilities
-### 
+
+### Mining Abilities
+
+### Slayer Abilities
+
+### Sorcery Abilities
+
+### Strength Abilities
+
+### Summoning Abilities
+
+### Thieving Abilities
+
+### Weaponsmithing Abilities
