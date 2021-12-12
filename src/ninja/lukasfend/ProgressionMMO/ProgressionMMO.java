@@ -31,7 +31,6 @@ public class ProgressionMMO extends JavaPlugin {
 			this.setEnabled(false);
 			return;
 		}
-		
 		System.out.println("[ProgressionMMO] Loading skills...");
 		skills = DataLoader.loadSkills();
 		for(Skill skill : skills.values()) {
