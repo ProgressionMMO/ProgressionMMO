@@ -2,7 +2,41 @@
 ProgressionMMO is a plugin for spigot that aims to provide more mmo-like content to minecraft.  
 The skills are mostly inspired by RuneScape, with some changes and additions to fit minecraft.
 
+- [ProgressionMMO](#progressionmmo)
+    * [Features](#features)
+        + [Skills](#skills)
+        + [Skill XP Table](#skill-xp-table)
+    * [Items](#items)
+    * [Mobs](#mobs)
+    * [Guilds](#guilds)
+    * [Commands](#commands)
+        + [`/pmlevels`](#--pmlevels-)
+        + [`/pmskill <skillname>`](#--pmskill--skillname--)
+    * [Spells & Abilities](#spells---abilities)
+        + [Agility Abilities](#agility-abilities)
+        + [Archery Abilities](#archery-abilities)
+            - [Windquiver](#windquiver)
+        + [Armorsmithing Abilities](#armorsmithing-abilities)
+        + [Attack Abilities](#attack-abilities)
+        + [Defense Abilities](#defense-abilities)
+            - [Counterwind](#counterwind)
+        + [Farming Abilities](#farming-abilities)
+        + [Fishing Abilities](#fishing-abilities)
+        + [Health Abilities](#health-abilities)
+            - [Vampirism](#vampirism)
+        + [Herblore Abilities](#herblore-abilities)
+        + [Mining Abilities](#mining-abilities)
+        + [Slayer Abilities](#slayer-abilities)
+        + [Sorcery Abilities](#sorcery-abilities)
+        + [Strength Abilities](#strength-abilities)
+        + [Summoning Abilities](#summoning-abilities)
+        + [Thieving Abilities](#thieving-abilities)
+        + [Weaponsmithing Abilities](#weaponsmithing-abilities)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
+---
 ## Features
 
 ### Skills
@@ -132,6 +166,7 @@ The skills are mostly inspired by RuneScape, with some changes and additions to 
 | 98  | 1.112.977  | 11.805.616   |
 | 99  | 1.228.825  | 13.034.441   |
 
+---
 ## Items
 
 Items come with a few default properties:  
@@ -150,9 +185,10 @@ Items come with a few default properties:
 | `lore`           | A lore on what the item is or where it was obtained                 |
 
 
-
+---
 ## Mobs
 
+---
 ## Guilds
 
 Guilds can be created by every player, and allow grouping. Groups provide following features:
@@ -166,6 +202,7 @@ Guilds can be created by every player, and allow grouping. Groups provide follow
 * Allows the summoning of guild-familiars
   * Temporary Mobs to help the guild (combat, farming, etc.)
 
+---
 ## Commands
 
 ### `/pmlevels`
@@ -177,10 +214,12 @@ Players can click on a row to automatically run `/pmskill` of the skill clicked.
 Shows detailed info about a skill:  
 ![](https://i.imgur.com/kHmchTE.png)  
 
+---
 ## Spells & Abilities
 
 ### Agility Abilities
 
+---
 ### Archery Abilities
 #### Windquiver
 * **Spell Name:** `Windquiver`
@@ -191,11 +230,13 @@ Shows detailed info about a skill:
 * **Chance at Levels:** `5/6/7/8/10/15/20/25/30/35/100`
 * _Refund chance is reduced by 75% when shooting a tipped arrow_
 
-
+---
 ### Armorsmithing Abilities
 
+---
 ### Attack Abilities
 
+---
 ### Defense Abilities
 #### Counterwind
 * **Spell Name:** `Counterwind`  
@@ -204,11 +245,13 @@ Shows detailed info about a skill:
 * **Unlocked at Level:** `40`  
 * **Upgrades at Levels:** `50/60/70/80/90/99`  
 * **Cooldown:** `80s/60s/40s/30s/25s/20s/15s`  
-
+---
 ### Farming Abilities
 
+---
 ### Fishing Abilities
 
+---
 ### Health Abilities
 #### Vampirism
 * **Spell Name:** `Vampirism`
@@ -218,19 +261,26 @@ Shows detailed info about a skill:
 * **Upgrades at Levels:** `50/60/70/80/90/99`
 * **Cooldown:** `30/27/24/20/18/15/12`
 * **Heal Percentage at Levels:** `5/8/12/16/20/22/25`
-
+---  
 ### Herblore Abilities
 
+---  
 ### Mining Abilities
 
+---
 ### Slayer Abilities
 
+---
 ### Sorcery Abilities
 
+---
 ### Strength Abilities
 
+---
 ### Summoning Abilities
 
+---
 ### Thieving Abilities
 
+---
 ### Weaponsmithing Abilities
