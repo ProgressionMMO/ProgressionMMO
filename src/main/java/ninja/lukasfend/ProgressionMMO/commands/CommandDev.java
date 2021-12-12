@@ -1,13 +1,12 @@
 package ninja.lukasfend.ProgressionMMO.commands;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
-import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
+import ninja.lukasfend.ProgressionMMO.datahandlers.MMOPlayer;
 import org.bukkit.util.Vector;
 import xyz.xenondevs.particle.ParticleBuilder;
 import xyz.xenondevs.particle.ParticleEffect;

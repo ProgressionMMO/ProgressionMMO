@@ -7,6 +7,9 @@ import net.md_5.bungee.api.ChatColor;
 import ninja.lukasfend.ProgressionMMO.skills.Skill;
 import ninja.lukasfend.ProgressionMMO.skills.SkillStrength;
 
+/**
+ * Defines which type of Skills there are
+ */
 public enum SkillType {
 	AGILITY,
 	ARCHERY,
@@ -25,14 +28,22 @@ public enum SkillType {
 	THIEVING,
 	WEAPONSMITHING
 	;
-	
+
+	/**
+	 * Returns a human readable Skillname
+	 * @return The name of the Skill
+	 */
 	public String getSkillName() {
 		switch(this) {
 			default:
 				return this.toString().substring(0,1).toUpperCase() + this.toString().substring(1).toLowerCase();
 		}
 	}
-	
+
+	/**
+	 * Returns the lore of the Skill
+	 * @return The lore of the Skill
+	 */
 	public String getDescriptionLore() {
 		switch(this) {
 			case STRENGTH: 	
@@ -44,9 +55,14 @@ public enum SkillType {
 						+ "with extra damage on all melee attacks";
 			default:
 				return "";
+		}
 	}
-	}
-	
+
+	/**
+	 * Returns the enum off the Skill's name as string
+	 * @param name The name of the skill (regardless of casing)
+	 * @return The enum of the skill
+	 */
 	public static SkillType fromString(String name) {
 		switch(name.toUpperCase()) {
 			case "AGILITY": 	
@@ -85,7 +101,11 @@ public enum SkillType {
 				return null;
 		}
 	}
-	
+
+	/**
+	 * Get the prefix color for a skill
+	 * @return The prefix color, default is black
+	 */
 	public String getColor() {
 		switch(this) {
 			case STRENGTH:
@@ -94,7 +114,11 @@ public enum SkillType {
 				return "§0";
 		}
 	}
-	
+
+	/**
+	 * Gets a Material that represents the skill
+	 * @return The material that represents the skill
+	 */
 	public Material getIconMaterial() {
 		switch(this) {
 			case AGILITY: 	

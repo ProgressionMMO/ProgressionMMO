@@ -5,6 +5,9 @@ import org.bukkit.persistence.PersistentDataType;
 
 import ninja.lukasfend.ProgressionMMO.enums.ProjectileTag;
 
+/**
+ * Allows the tagging of projectiles
+ */
 public class ProjectileTagger {
 	
 	public static Projectile addBool(Projectile proj, ProjectileTag tag, boolean value) {

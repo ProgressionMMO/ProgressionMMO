@@ -18,3 +18,7 @@ commands:
     usage: Usage /<command> [player]
     description: Shows the levels and xp of a player
     aliases: [pmxp]
+  pmguild:
+    usage: Usage /<command> <help>
+    description: Command for handling guilds
+    aliases: [guild]

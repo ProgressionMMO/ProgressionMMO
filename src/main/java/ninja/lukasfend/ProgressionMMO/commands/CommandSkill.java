@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
-import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
+import ninja.lukasfend.ProgressionMMO.datahandlers.MMOPlayer;
 import ninja.lukasfend.ProgressionMMO.handlers.StringHelper;
 import ninja.lukasfend.ProgressionMMO.handlers.TableGenerator;
 import ninja.lukasfend.ProgressionMMO.handlers.TableGenerator.Alignment;

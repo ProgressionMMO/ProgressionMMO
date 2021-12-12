@@ -13,7 +13,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
-import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
+import ninja.lukasfend.ProgressionMMO.datahandlers.MMOPlayer;
 import ninja.lukasfend.ProgressionMMO.handlers.StringHelper;
 import ninja.lukasfend.ProgressionMMO.handlers.TableGenerator;
 import ninja.lukasfend.ProgressionMMO.handlers.TableGenerator.Receiver;

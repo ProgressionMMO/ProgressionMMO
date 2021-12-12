@@ -2,6 +2,7 @@ package ninja.lukasfend.ProgressionMMO;
 
 import java.util.HashMap;
 
+import ninja.lukasfend.ProgressionMMO.commands.CommandGuild;
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultConfigurationFile;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -14,7 +15,7 @@ import ninja.lukasfend.ProgressionMMO.enums.ProjectileTag;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
 import ninja.lukasfend.ProgressionMMO.events.EventProjectileHit;
 import ninja.lukasfend.ProgressionMMO.handlers.DataLoader;
-import ninja.lukasfend.ProgressionMMO.handlers.MMOPlayer;
+import ninja.lukasfend.ProgressionMMO.datahandlers.MMOPlayer;
 import ninja.lukasfend.ProgressionMMO.skills.Skill;
 
 public class ProgressionMMO extends JavaPlugin {
@@ -22,6 +23,7 @@ public class ProgressionMMO extends JavaPlugin {
 	private static ProgressionMMO instance;
 	public static HashMap<SkillType, Skill> skills = new HashMap<SkillType, Skill>();
 	public static HashMap<ProjectileTag, NamespacedKey> projectileKeys = new HashMap<ProjectileTag, NamespacedKey>();
+	public static HashMap<String, Boolean> guildChatEnabled = new HashMap<String, Boolean>();
 
 	@Override
 	public void onEnable() {
@@ -48,6 +50,7 @@ public class ProgressionMMO extends JavaPlugin {
 		getCommand("pmdev").setExecutor(new CommandDev());
 		getCommand("pmlevels").setExecutor(new CommandLevels());
 		getCommand("pmskill").setExecutor(new CommandSkill());
+		getCommand("pmguild").setExecutor(new CommandGuild());
 		
 		System.out.println("[ProgressionMMO] Registering events...");
 		getServer().getPluginManager().registerEvents(new EventProjectileHit(), this);

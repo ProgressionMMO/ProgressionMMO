@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Copyright by FisheyLP, Version 1.3 (12.08.16)
+/**
+ * Helper class for creating chat tables
+ *
+ * Provided by: FisheyLP, Version 1.3 (12.08.16)
+ */
 public class TableGenerator {
 
     private static String delimiter = " §7|§r ";

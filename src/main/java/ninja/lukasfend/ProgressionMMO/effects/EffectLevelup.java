@@ -17,6 +17,11 @@ import java.awt.*;
 
 public class EffectLevelup {
 
+	/**
+	 * Plays an effect that represents a player levelup.
+	 * @param p The player (for the location)
+	 * @param is99 If true, soulflames will appear instead of normal ones
+	 */
 	public static void playEffect(Player p, boolean is99) {
 		Location loc = p.getLocation();
 		loc.add(new Vector(0,1.3,0));
