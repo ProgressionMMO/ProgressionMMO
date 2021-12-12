@@ -10,12 +10,18 @@ public class DefaultConfigurationFile {
 		FileConfiguration data = plugin.getConfig();
 		
 		// Basic Data
-		data.set("skills.xpMultiplier", 1.0f);
+		data.set("general.xpMultiplier", 1.0f);
 		
 		// Skill list
 		for(SkillType skill : SkillType.values()) {
-			data.set("skills.skills."+skill.toString()+".multiplier", 1.0f);
+			data.set("general.skills."+skill.toString()+".xpMultiplier", 1.0f);
 		}
+
+		// Balancing Data
+
+		/*
+		*		SKILL CONFIGURATION
+		*/
 		
 		return data;
 	}

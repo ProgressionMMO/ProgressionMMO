@@ -2,6 +2,7 @@ package ninja.lukasfend.ProgressionMMO;
 
 import java.util.HashMap;
 
+import ninja.lukasfend.ProgressionMMO.defaults.DefaultConfigurationFile;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +32,12 @@ public class ProgressionMMO extends JavaPlugin {
 			this.setEnabled(false);
 			return;
 		}
+
+		if(!getConfig().contains("general.xpMultiplier")) {
+			System.out.println("[ProgressionMMO] Creating default config...");
+			DefaultConfigurationFile.generate(this);
+		}
+
 		System.out.println("[ProgressionMMO] Loading skills...");
 		skills = DataLoader.loadSkills();
 		for(Skill skill : skills.values()) {

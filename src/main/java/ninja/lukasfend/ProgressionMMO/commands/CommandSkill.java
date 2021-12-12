@@ -50,7 +50,7 @@ public class CommandSkill implements CommandExecutor {
 				tg.addRow("§6XP for Level " + (level+1) + ":", StringHelper.thousandSpacers(targetXP));
 			}
 			tg.addRow("§6XP Remaining:", StringHelper.thousandSpacers(remainingXP));
-			tg.addRow("§6Progress:", StringHelper.progressBar(30, percentage) + String.format(" %.02f", percentage*100).replace(",", "."));
+			tg.addRow("§6Progress:", StringHelper.progressBar(30, percentage) + "§r" +String.format(" %.02f", percentage*100).replace(",", "."));
 			
 			for(String line : tg.generate(Receiver.CLIENT, true, true)) {
 				cs.sendMessage(line);

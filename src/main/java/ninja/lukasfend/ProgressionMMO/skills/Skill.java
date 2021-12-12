@@ -60,7 +60,7 @@ public abstract class Skill implements Listener {
 			for(Player x : Bukkit.getServer().getOnlinePlayers()) {
 				x.spigot().sendMessage(message);
 			}
-			EffectLevelup.playEffect(p, 2);
+			EffectLevelup.playEffect(p, false);
 			p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 3, 2f);
 		} else if(level == 99) {
 			TextComponent message = new TextComponent( "§c§l" + p.getDisplayName() + "§4§l has achieved level 99 §r" + skill.getColor() + skill.getSkillName() + "§r. §6Congratulations!");
@@ -70,17 +70,15 @@ public abstract class Skill implements Listener {
 			for(Player x : Bukkit.getServer().getOnlinePlayers()) {
 				x.spigot().sendMessage(message);
 			}
-			EffectLevelup.playEffect(p, 2);
+			EffectLevelup.playEffect(p, true);
 			p.getWorld().playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 3, 0.5f);
-		} else {
-			
 		}
 		
 		TextComponent message = new TextComponent( "You've just advanced to level "+level+"§r in §l" + skill.getColor() + skill.getSkillName() + "§r.");
 		message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/pmlevels " ) );
 		message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT,  new ComponentBuilder("You reached level " + level + " " + skill.getSkillName()).create()) );
 		p.spigot().sendMessage(message);
-		EffectLevelup.playEffect(p, 1);
+		EffectLevelup.playEffect(p, false);
 		
 		// Send player message
 		this.handleLevelup(MMOPlayer.get(p), level);
