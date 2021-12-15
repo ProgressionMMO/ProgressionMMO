@@ -21,4 +21,4 @@ commands:
   pmguild:
     usage: Usage /<command> <help>
     description: Command for handling guilds
-    aliases: [guild]
+    aliases: [guild, g]

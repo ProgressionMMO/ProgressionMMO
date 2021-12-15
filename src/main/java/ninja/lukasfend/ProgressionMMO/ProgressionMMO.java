@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import ninja.lukasfend.ProgressionMMO.commands.CommandGuild;
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultConfigurationFile;
+import ninja.lukasfend.ProgressionMMO.events.EventPlayerChat;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -54,7 +55,8 @@ public class ProgressionMMO extends JavaPlugin {
 		
 		System.out.println("[ProgressionMMO] Registering events...");
 		getServer().getPluginManager().registerEvents(new EventProjectileHit(), this);
-		
+		getServer().getPluginManager().registerEvents(new EventPlayerChat(), this);
+
 	}
 	
 	@Override

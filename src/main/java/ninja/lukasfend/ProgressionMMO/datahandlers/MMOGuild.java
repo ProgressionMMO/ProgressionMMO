@@ -1,9 +1,15 @@
 package ninja.lukasfend.ProgressionMMO.datahandlers;
 
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import ninja.lukasfend.ProgressionMMO.ProgressionMMO;
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultGuildDataFile;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -21,6 +27,7 @@ public class MMOGuild {
 
     // Instance list
     private static HashMap<String, MMOGuild> guildInstances = new HashMap<String, MMOGuild>();
+    private ArrayList<String> activeInvites = new ArrayList<String>();
     private String guildName;
     private String guildOwnerId;
     private String fileName;
@@ -65,6 +72,54 @@ public class MMOGuild {
     }
 
 
+    /**
+     * Invites a player to a guild
+     * @param sender The player that sent the invite
+     * @param target The player that receives the invite
+     */
+    public void invitePlayer(Player sender, Player target) {
+        activeInvites.add(target.getUniqueId().toString());
+        target.sendMessage("§2" + sender.getDisplayName() + "§r invited you to join §a" + guildName);
+        TextComponent message = new TextComponent( "§2[Click here to accept the invite]" );
+        message.setClickEvent( new ClickEvent( ClickEvent.Action.RUN_COMMAND, "/pmguild accept " + guildName ) );
+        message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_TEXT,  new ComponentBuilder("Click to join §a" + guildName).create()) );
+        target.spigot().sendMessage(message);
+    }
+
+    /**
+     * Returns if an invite for a certain player is active
+     * @param player The player to be invited
+     * @return True if an invite for that player exists
+     */
+    public boolean hasActiveInvite(Player player) {
+        if(activeInvites.contains(player.getUniqueId().toString())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Removes/revokes an invitation for a player
+     * @param p The player to be removed from the invite list
+     */
+    public void removeInvite(Player p) {
+        if(hasActiveInvite(p)) {
+            activeInvites.remove(activeInvites.indexOf(p.getUniqueId().toString()));
+        }
+    }
+
+    /**
+     * Sends a message to all currently online players (automatically adds prefix)
+     * @param message The message to be sent to the members
+     */
+    public void sendMessageToAllPlayers(String message) {
+        for(Player p : getOnlinePlayers()) {
+            p.sendMessage("[§2"+guildName+"§r] "+message);
+        }
+    }
+
+
 
     /**
      * Checks if the guild has the player in it
@@ -73,6 +128,32 @@ public class MMOGuild {
      */
     public boolean hasPlayer(Player p) {
         return data.contains("guild.players." + p.getUniqueId().toString() + ".uuid");
+    }
+
+    /**
+     * Returns true if a player (by name) is in the guild
+     * @param playerName The name of the player (ignores casing)
+     * @return True if player is in guild
+     */
+    public boolean hasPlayer(String playerName) {
+        for(String path : data.getConfigurationSection("guild.players").getKeys(false)) {
+            if(data.getString("guild.players." + path + ".name").equalsIgnoreCase(playerName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a list of all player names in a guild
+     * @return The list of player names
+     */
+    public ArrayList<String> getPlayerNames() {
+        ArrayList<String> players = new ArrayList<String>();
+        for(String path : data.getConfigurationSection("guild.players").getKeys(false)) {
+            players.add(data.getString("guild.players." + path + ".name"));
+        }
+        return players;
     }
 
     /**
@@ -88,7 +169,7 @@ public class MMOGuild {
 
     /**
      * Removes a player from the guild
-     * @param p
+     * @param p The player to be removed
      */
     public void removePlayer(Player p) {
         if(!hasPlayer(p))return;
@@ -103,7 +184,11 @@ public class MMOGuild {
         for(Player players : getAllPlayers()) {
             MMOPlayer.getWithoutMemory(players).leaveGuild();
         }
-        if(dataFile.delete()) {
+        data = null;
+        dataFile = null;
+        String fileName = guildName.replace(" ", "_").toLowerCase();
+        File df = new File(ProgressionMMO.getInstance().getDataFolder() + "/guildsaves/" + fileName + ".yaml");
+        if(df.delete()) {
             System.out.println("Guild file was deleted: " + guildName);
         } else {
             System.out.println("Gould file couldn't be deleted: " + guildName);
@@ -118,6 +203,30 @@ public class MMOGuild {
      */
     public String getRank(Player p) {
         return data.getString("guild.players." + p.getUniqueId().toString() + ".rank");
+    }
+
+    /**
+     * Gets the home location of a guild
+     * @return The location of the guild (with world)
+     */
+    public Location getHomeLocation() {
+        return new Location(
+                Bukkit.getWorld(data.getString("guild.home.world")),
+                data.getDouble("guild.home.x"),
+                data.getDouble("guild.home.y"),
+                data.getDouble("guild.home.z")
+        );
+    }
+
+    /**
+     * Sets the new guild home teleport point
+     * @param l The location of the new home
+     */
+    public void setHomeLocation(Location l) {
+        data.set("guild.home.world", l.getWorld().getName());
+        data.set("guild.home.x", l.getX());
+        data.set("guild.home.y", l.getY());
+        data.set("guild.home.z", l.getZ());
     }
 
 

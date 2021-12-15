@@ -4,6 +4,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import ninja.lukasfend.ProgressionMMO.ProgressionMMO;
 import ninja.lukasfend.ProgressionMMO.datahandlers.MMOGuild;
 import ninja.lukasfend.ProgressionMMO.datahandlers.MMOPlayer;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
@@ -60,7 +61,7 @@ public class CommandGuild implements CommandExecutor {
             }
 
             if(args.length == 1) {
-                p.sendMessage("You need to give the guild a name!");
+                p.sendMessage("§cYou need to give the guild a name!");
                 return true;
             }
 
@@ -100,9 +101,7 @@ public class CommandGuild implements CommandExecutor {
                     MMOGuild oldGuild = mp.getGuild();
                     mp.leaveGuild();
                     p.sendMessage("You left " + oldGuild.getName() + ".");
-                    for(Player oldGuildPlayer : oldGuild.getOnlinePlayers()) {
-                        oldGuildPlayer.sendMessage("§6" + p.getDisplayName() + "§c left the guild.");
-                    }
+                    oldGuild.sendMessageToAllPlayers("§6" + p.getDisplayName() + "§c left the guild.");
                     return true;
                 }
             } else {
@@ -116,7 +115,124 @@ public class CommandGuild implements CommandExecutor {
                 p.spigot().sendMessage(message);
                 return true;
             }
+
+
+        // Toggle guild chat
+        } else if(args[0].equalsIgnoreCase("chat")) {
+            boolean isNowEnabled;
+            if(!ProgressionMMO.guildChatEnabled.containsKey(p.getUniqueId().toString())) {
+                ProgressionMMO.guildChatEnabled.put(p.getUniqueId().toString(), true);
+                isNowEnabled = true;
+            } else {
+                isNowEnabled = !ProgressionMMO.guildChatEnabled.get(p.getUniqueId().toString());
+                ProgressionMMO.guildChatEnabled.put(p.getUniqueId().toString(), isNowEnabled);
+            }
+
+            if(isNowEnabled) {
+                p.sendMessage("§6Guild chat is now §2enabled.");
+            } else {
+                p.sendMessage("§6Guild chat is now §cdisabled.");
+            }
+            return true;
+
+
+        // Guild home teleport
+        } else if(args[0].equalsIgnoreCase("home")) {
+            if(!mp.hasGuild()) {
+                p.sendMessage("§cYou are currently not in a guild.");
+                return true;
+            }
+            MMOGuild mg = mp.getGuild();
+            p.sendMessage("Teleporting...");
+            p.teleport(mg.getHomeLocation());
+            return true;
+
+
+
+        // Guild sethome teleport
+        } else if(args[0].equalsIgnoreCase("sethome")) {
+            if(!mp.hasGuild()) {
+                p.sendMessage("§cYou are currently not in a guild.");
+                return true;
+            }
+            if(!mp.getGuildRank().equalsIgnoreCase("leader")) {
+                p.sendMessage("§cOnly the guild leader can set a new home.");
+                return true;
+            }
+            MMOGuild mg = mp.getGuild();
+            mg.setHomeLocation(p.getLocation());
+            mg.sendMessageToAllPlayers("§6" + p.getDisplayName() + "§r set a new guild home.");
+            p.sendMessage("New guild home set!");
+            return true;
+
+
+
+        // Invites a new player
+        } else if (args[0].equalsIgnoreCase("invite")) {
+            if(!mp.hasGuild()) {
+                p.sendMessage("§cYou are currently not in a guild.");
+                return true;
+            }
+            if(!mp.getGuildRank().equalsIgnoreCase("leader")) {
+                p.sendMessage("§cOnly the guild leader can invite new players.");
+                return true;
+            }
+            if(args.length != 2) {
+                p.sendMessage("§cPlease enter the name of the player to invite.");
+                return true;
+            }
+            MMOGuild mg = mp.getGuild();
+            Player target = Bukkit.getServer().getPlayer(args[1]);
+            if(target == null || !target.isOnline()) {
+                p.sendMessage("§cError: Player §6" + args[0] + "§c not found. Note that you can only invite online players.");
+                return true;
+            }
+            if(MMOPlayer.get(target).hasGuild()) {
+                p.sendMessage("§6" + target.getDisplayName() + "§c already has a guild.");
+                return true;
+            }
+            mg.invitePlayer(p, target);
+            mg.sendMessageToAllPlayers("§6"+p.getName() + "§r invited §e" + target.getDisplayName() + "§r to the guild.");
+            return true;
+
+
+
+
+
+        // Accepts a guild invite
+        } else if(args[0].equalsIgnoreCase("accept")) {
+            if(args.length < 2) {
+                p.sendMessage("§cCommand usage: §r/guild accept <guild name to join> §7 - After receiving an invite.");
+                return true;
+            }
+            if(mp.hasGuild()) {
+                p.sendMessage("§cYou already have a guild!");
+                return true;
+            }
+            String guildName = "";
+            for( int i = 1; i < args.length; i++ ) {
+                guildName += args[i] + " ";
+            }
+            guildName = guildName.trim();
+            MMOGuild invitingGuild = MMOGuild.get(guildName);
+            if(invitingGuild == null) {
+                p.sendMessage("§cError: A guild with the name §6" + guildName + "§r was not found.");
+                return true;
+            }
+
+            if(invitingGuild.hasActiveInvite(p)) {
+                invitingGuild.removeInvite(p);
+                invitingGuild.addPlayer(p);
+                invitingGuild.sendMessageToAllPlayers("§2" + p.getDisplayName() + "§a joined the guild!");
+                return true;
+            }
+
+            p.sendMessage("§cYou don't have an active invite from that guild.");
+            return true;
+
         }
+
+
         return false;
     }
 
