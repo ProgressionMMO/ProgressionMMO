@@ -22,3 +22,6 @@ commands:
     usage: Usage /<command> <help>
     description: Command for handling guilds
     aliases: [guild, g]
+  pm:
+    usage: Usage /<command> <togglescoreboard>
+    description: Command for handling various options

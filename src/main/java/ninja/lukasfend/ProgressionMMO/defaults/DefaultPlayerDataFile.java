@@ -23,6 +23,9 @@ public class DefaultPlayerDataFile {
 		data.set("player.uuid", p.getUniqueId().toString());
 		data.set("player.name", p.getName());
 		data.set("player.guild", "none");
+
+		// Individual config
+		data.set("player.config.useScoreboard", true);
 		
 		// Skill list
 		for(SkillType skill : SkillType.values()) {

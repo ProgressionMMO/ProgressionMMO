@@ -209,6 +209,22 @@ public class MMOPlayer {
 	}
 
 	/**
+	 * Returns if the player is using a scoreboard
+	 * @return True if scoreboard is active
+	 */
+	public boolean isUsingScoreboard() {
+		return data.getBoolean("player.config.useScoreboard");
+	}
+
+	/**
+	 * Toggles the scoreboard on/off
+	 */
+	public void toggleScoreboard() {
+		data.set("player.config.useScoreboard", !isUsingScoreboard());
+		save();
+	}
+
+	/**
 	 * Unloads all players from memory
 	 */
 	public static void unloadAll() {

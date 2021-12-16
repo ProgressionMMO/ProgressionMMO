@@ -2,16 +2,14 @@ package ninja.lukasfend.ProgressionMMO;
 
 import java.util.HashMap;
 
-import ninja.lukasfend.ProgressionMMO.commands.CommandGuild;
+import ninja.lukasfend.ProgressionMMO.commands.*;
 import ninja.lukasfend.ProgressionMMO.defaults.DefaultConfigurationFile;
 import ninja.lukasfend.ProgressionMMO.events.EventPlayerChat;
+import ninja.lukasfend.ProgressionMMO.features.FeatureScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ninja.lukasfend.ProgressionMMO.commands.CommandDev;
-import ninja.lukasfend.ProgressionMMO.commands.CommandLevels;
-import ninja.lukasfend.ProgressionMMO.commands.CommandSkill;
 import ninja.lukasfend.ProgressionMMO.enums.ProjectileTag;
 import ninja.lukasfend.ProgressionMMO.enums.SkillType;
 import ninja.lukasfend.ProgressionMMO.events.EventProjectileHit;
@@ -52,10 +50,13 @@ public class ProgressionMMO extends JavaPlugin {
 		getCommand("pmlevels").setExecutor(new CommandLevels());
 		getCommand("pmskill").setExecutor(new CommandSkill());
 		getCommand("pmguild").setExecutor(new CommandGuild());
+		getCommand("pmguild").setTabCompleter(new CommandGuildTabCompleter());
+		getCommand("pm").setExecutor(new CommandMain());
 		
 		System.out.println("[ProgressionMMO] Registering events...");
 		getServer().getPluginManager().registerEvents(new EventProjectileHit(), this);
 		getServer().getPluginManager().registerEvents(new EventPlayerChat(), this);
+		getServer().getPluginManager().registerEvents(new FeatureScoreboard(), this);
 
 	}
 	
