@@ -48,6 +48,7 @@ public abstract class Skill implements Listener {
 		return (int) Math.round(total);
 	}
 
+
 	/**
 	 * Returns the level by the xp
 	 * @param xp The xp of the skill

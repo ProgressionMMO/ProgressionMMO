@@ -10,11 +10,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.*;
 
+/**
+ * Implements the scoreboard that shows player's top levels
+ */
 public class FeatureScoreboard implements Listener {
 
     private final static ScoreboardManager manager = Bukkit.getScoreboardManager();
     private static final Scoreboard board = manager.getNewScoreboard();
-    private final static Objective objective = board.registerNewObjective("test", "dummy");
+    private final static Objective objective = board.registerNewObjective("Skills", "Level");
     private final static Scoreboard empty = Bukkit.getScoreboardManager().getNewScoreboard();
 
     @EventHandler

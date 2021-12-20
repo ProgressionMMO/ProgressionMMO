@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+import ninja.lukasfend.ProgressionMMO.features.ActionBar;
+import ninja.lukasfend.ProgressionMMO.features.BossBarHandler;
+import org.bukkit.boss.BossBar;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -160,8 +163,22 @@ public class MMOPlayer {
 		int newXP = getXP(skill)+xp; 
 		int previousLevel = Skill.getLevelByXp(newXP-xp);
 		int newLevel = Skill.getLevelByXp(newXP);
+		int nextLevelXP = Skill.getTotalXPOfLevel(newLevel + 1);
+		int currentLevelXP = Skill.getTotalXPOfLevel(newLevel);
 		data.set("player.skills."+skill.toString()+".xp", newXP);
 		data.set("player.totalXp", getXP()+xp);
+		// Display bossbar
+		BossBarHandler bbh = BossBarHandler.getInstance();
+		BossBar bb = bbh.getBar(player, skill);
+		double percentageToNextLevel = (double) (newXP - currentLevelXP) / (nextLevelXP - currentLevelXP);
+
+		System.out.println(percentageToNextLevel + " %, newXP: " + newXP + " nextXP: " + nextLevelXP);
+
+		bb.setProgress(percentageToNextLevel);
+		bbh.showForAtLeast(player, skill, 1000*4); // Show for 4 seconds
+
+		ActionBar.sendXPReceived(player, xp, skill);
+
 		if( newLevel > previousLevel ) {
 			// Level UP!
 			ProgressionMMO.getInstance().skills.get(skill).evokeLevelup(player, skill, newLevel);

@@ -1,5 +1,6 @@
 package ninja.lukasfend.ProgressionMMO.commands;
 
+import ninja.lukasfend.ProgressionMMO.features.ActionBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -46,6 +47,9 @@ public class CommandDev implements CommandExecutor {
 						.setSpeed(0.1f)
 						.display();
 
+			} else if (args[0].equalsIgnoreCase("sendactionbar")) {
+				ActionBar.sendActionBar(p, "§athis is a test!");
+				p.sendMessage("test!");
 			}
 		}
 		return true;
